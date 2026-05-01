@@ -73,37 +73,28 @@ configure_live_build() {
     log "Configuring live-build..."
     cd "${NEBULA_BUILD_DIR}"
 
-    # Build lb config command with only supported options
-    local lb_args=(
-        --distribution "${NEBULA_SUITE}"
-        --architectures "${NEBULA_ARCH}"
-        --archive-areas "main contrib non-free non-free-firmware"
-        --mirror-bootstrap "${NEBULA_MIRROR}"
-        --mirror-chroot "${NEBULA_MIRROR}"
-        --mirror-binary "${NEBULA_MIRROR}"
-        --bootappend-live "boot=live components hostname=${NEBULA_HOSTNAME} username=${NEBULA_DEFAULT_USER} locales=${NEBULA_DEFAULT_LOCALE} timezone=${NEBULA_DEFAULT_TIMEZONE}"
-        --iso-application "${NEBULA_NAME}"
-        --iso-publisher "${NEBULA_NAME} Project"
-        --iso-volume "${NEBULA_ISO_LABEL}"
-        --image-name "${NEBULA_NAME}"
-        --binary-images iso-hybrid
-        --memtest none
-        --updates true
-        --security true
-        --checksums sha256
-        --compression "${NEBULA_COMPRESSION}"
-        --apt-recommends true
-        --debootstrap-options "--variant=minbase"
-    )
+    # Detect live-build version
+    local lb_version
+    lb_version=$(lb --version 2>/dev/null | head -1 || echo "unknown")
+    log "live-build version: $lb_version"
 
-    # Add bootloaders (try grub-efi first, fall back to syslinux only)
-    if dpkg -l grub-efi-amd64-bin &>/dev/null; then
-        lb_args+=(--bootloaders "grub-efi,syslinux")
-    else
-        lb_args+=(--bootloaders "syslinux")
-    fi
-
-    lb config "${lb_args[@]}"
+    # Ubuntu's live-build 3.0~a57 uses different options than Debian's 1:20230502+
+    # Use only options compatible with Ubuntu's version (used on GitHub Actions)
+    lb config \
+        --distribution "${NEBULA_SUITE}" \
+        --architectures "${NEBULA_ARCH}" \
+        --archive-areas "main contrib non-free non-free-firmware" \
+        --mirror-bootstrap "${NEBULA_MIRROR}" \
+        --mirror-chroot "${NEBULA_MIRROR}" \
+        --mirror-binary "${NEBULA_MIRROR}" \
+        --bootappend-live "boot=live components hostname=${NEBULA_HOSTNAME} username=${NEBULA_DEFAULT_USER} locales=${NEBULA_DEFAULT_LOCALE} timezone=${NEBULA_DEFAULT_TIMEZONE}" \
+        --binary-images iso-hybrid \
+        --bootloader syslinux \
+        --bootstrap-flavour minimal \
+        --checksums sha256 \
+        --compression gzip \
+        --apt-recommends true \
+        --debian-installer false
 
     ok "Live-build configured"
 }
@@ -121,11 +112,11 @@ setup_package_lists() {
 
 setup_hooks() {
     log "Setting up build hooks..."
-    mkdir -p "${NEBULA_BUILD_DIR}/config/hooks/live"
-    mkdir -p "${NEBULA_BUILD_DIR}/config/hooks/normal"
+    # Ubuntu live-build 3.0 uses config/hooks/ directly
+    mkdir -p "${NEBULA_BUILD_DIR}/config/hooks"
 
     # Chroot hook: runs inside the chroot during build
-    cat > "${NEBULA_BUILD_DIR}/config/hooks/normal/0100-nebula-setup.hook.chroot" << 'HOOK'
+    cat > "${NEBULA_BUILD_DIR}/config/hooks/0100-nebula-setup.hook.chroot" << 'HOOK'
 #!/bin/bash
 set -e
 
@@ -165,10 +156,10 @@ ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 
 echo "[NebulaOS] Chroot setup complete."
 HOOK
-    chmod +x "${NEBULA_BUILD_DIR}/config/hooks/normal/0100-nebula-setup.hook.chroot"
+    chmod +x "${NEBULA_BUILD_DIR}/config/hooks/0100-nebula-setup.hook.chroot"
 
     # Desktop setup hook
-    cat > "${NEBULA_BUILD_DIR}/config/hooks/normal/0200-nebula-desktop.hook.chroot" << 'HOOK'
+    cat > "${NEBULA_BUILD_DIR}/config/hooks/0200-nebula-desktop.hook.chroot" << 'HOOK'
 #!/bin/bash
 set -e
 
@@ -225,7 +216,7 @@ EOF
 
 echo "[NebulaOS] Desktop setup complete."
 HOOK
-    chmod +x "${NEBULA_BUILD_DIR}/config/hooks/normal/0200-nebula-desktop.hook.chroot"
+    chmod +x "${NEBULA_BUILD_DIR}/config/hooks/0200-nebula-desktop.hook.chroot"
 
     ok "Build hooks configured"
 }
