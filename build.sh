@@ -44,7 +44,7 @@ check_root() {
 
 check_dependencies() {
     log "Checking build dependencies..."
-    local deps=(live-build debootstrap squashfs-tools xorriso grub-efi-amd64-bin grub-pc-bin mtools)
+    local deps=(live-build debootstrap squashfs-tools xorriso mtools debian-archive-keyring)
     local missing=()
 
     for dep in "${deps[@]}"; do
@@ -87,6 +87,8 @@ configure_live_build() {
         --mirror-bootstrap "${NEBULA_MIRROR}" \
         --mirror-chroot "${NEBULA_MIRROR}" \
         --mirror-binary "${NEBULA_MIRROR}" \
+        --mirror-chroot-security "http://security.debian.org/debian-security" \
+        --mirror-binary-security "http://security.debian.org/debian-security" \
         --bootappend-live "boot=live components hostname=${NEBULA_HOSTNAME} username=${NEBULA_DEFAULT_USER} locales=${NEBULA_DEFAULT_LOCALE} timezone=${NEBULA_DEFAULT_TIMEZONE}" \
         --binary-images iso-hybrid \
         --bootloader syslinux \

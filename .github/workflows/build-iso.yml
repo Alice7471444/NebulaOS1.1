@@ -42,7 +42,8 @@ jobs:
             dosfstools \
             isolinux \
             syslinux-common \
-            syslinux-utils
+            syslinux-utils \
+            debian-archive-keyring
           echo "=== live-build version ==="
           lb --version || true
 
