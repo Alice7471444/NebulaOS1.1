@@ -1,0 +1,13 @@
+[Unit]
+Description=NebulaOS Desktop Session
+After=graphical.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/nebula-session
+Restart=on-failure
+Environment=XDG_SESSION_TYPE=wayland
+Environment=XDG_CURRENT_DESKTOP=NebulaOS
+
+[Install]
+WantedBy=graphical.target

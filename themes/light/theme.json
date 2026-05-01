@@ -1,0 +1,40 @@
+{
+    "name": "Nebula Light",
+    "description": "Light theme with airy, clean aesthetics",
+    "darkMode": false,
+    "accentColor": "#4488ff",
+    "backgroundColor": "#f0f0f5",
+    "surfaceColor": "#ffffff",
+    "textColor": "#1a1a2e",
+    "textSecondaryColor": "#666680",
+    "borderColor": "#d0d0e0",
+    "blurRadius": 25,
+    "opacity": 0.90,
+    "cornerRadius": 12,
+    "animationDuration": 250,
+    "gradients": {
+        "primary": ["#e0e8ff", "#ede0ff"],
+        "accent": ["#4488ff", "#8844ff"],
+        "surface": ["#ffffff", "#f5f5fa"]
+    },
+    "shadows": {
+        "panel": "0 8px 32px rgba(0, 0, 0, 0.08)",
+        "popup": "0 16px 48px rgba(0, 0, 0, 0.12)",
+        "button": "0 2px 8px rgba(0, 0, 0, 0.05)"
+    },
+    "fonts": {
+        "primary": "Inter",
+        "monospace": "Fira Code",
+        "sizes": {
+            "small": 11,
+            "body": 13,
+            "subtitle": 16,
+            "title": 20,
+            "headline": 28
+        }
+    },
+    "icons": {
+        "theme": "Papirus",
+        "cursor": "Breeze"
+    }
+}

@@ -1,0 +1,154 @@
+# NebulaOS Package List
+# Base packages for the live/installed system
+
+# === Base System ===
+linux-image-amd64
+systemd
+systemd-sysv
+dbus
+udev
+sudo
+bash
+zsh
+
+# === Bootloader ===
+grub-efi-amd64
+grub-pc-bin
+efibootmgr
+shim-signed
+
+# === Filesystem ===
+e2fsprogs
+btrfs-progs
+dosfstools
+ntfs-3g
+exfat-fuse
+exfat-utils
+
+# === Networking ===
+network-manager
+network-manager-gnome
+wpasupplicant
+wireless-tools
+firmware-iwlwifi
+firmware-realtek
+firmware-atheros
+bluez
+bluez-tools
+pulseaudio-module-bluetooth
+openvpn
+network-manager-openvpn
+
+# === Display Server ===
+wayland-protocols
+xwayland
+xorg
+xserver-xorg
+xserver-xorg-video-all
+xserver-xorg-input-all
+mesa-utils
+libgl1-mesa-dri
+libvulkan1
+mesa-vulkan-drivers
+
+# === Desktop Dependencies ===
+qt6-base-dev
+qt6-declarative-dev
+qt6-wayland
+qt6-multimedia-dev
+qt6-svg-dev
+qml6-module-qtquick
+qml6-module-qtquick-controls
+qml6-module-qtquick-layouts
+qml6-module-qtquick-window
+qml6-module-qtmultimedia
+libqt6svg6
+pipewire
+pipewire-pulse
+wireplumber
+
+# === Fonts ===
+fonts-noto
+fonts-noto-color-emoji
+fonts-inter
+fonts-firacode
+
+# === Themes & Icons ===
+papirus-icon-theme
+breeze-cursor-theme
+adwaita-icon-theme
+
+# === Core Applications ===
+firefox-esr
+thunar
+alacritty
+xfce4-terminal
+gedit
+gnome-calculator
+gnome-calendar
+xed
+evince
+eog
+celluloid
+rhythmbox
+gnome-system-monitor
+
+# === Multimedia Codecs ===
+gstreamer1.0-plugins-base
+gstreamer1.0-plugins-good
+gstreamer1.0-plugins-bad
+gstreamer1.0-plugins-ugly
+gstreamer1.0-libav
+ffmpeg
+libavcodec-extra
+
+# === Development Tools ===
+git
+python3
+python3-pip
+python3-venv
+nodejs
+npm
+gcc
+g++
+make
+cmake
+rustc
+cargo
+
+# === Security ===
+ufw
+apparmor
+apparmor-utils
+
+# === Package Management ===
+flatpak
+gnome-software
+gnome-software-plugin-flatpak
+
+# === Installer ===
+calamares
+calamares-settings-debian
+
+# === VM Guest Tools ===
+open-vm-tools
+open-vm-tools-desktop
+virtualbox-guest-utils
+virtualbox-guest-x11
+
+# === AI Assistant Dependencies ===
+python3-speechrecognition
+python3-pyttsx3
+espeak-ng
+python3-openai
+
+# === Utilities ===
+curl
+wget
+unzip
+p7zip-full
+htop
+neofetch
+rsync
+gparted
+timeshift

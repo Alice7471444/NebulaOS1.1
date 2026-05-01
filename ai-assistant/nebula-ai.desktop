@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Nebula AI
+Comment=NebulaOS AI Assistant
+Exec=/usr/bin/python3 /opt/nebula-ai/nebula_ai.py
+Icon=nebula-ai
+Terminal=false
+Type=Application
+Categories=Utility;
+StartupNotify=true
+Keywords=ai;assistant;chat;help;

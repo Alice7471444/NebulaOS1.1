@@ -1,0 +1,40 @@
+{
+    "name": "Nebula Dark",
+    "description": "Default dark theme with deep space aesthetics",
+    "darkMode": true,
+    "accentColor": "#4488ff",
+    "backgroundColor": "#0a0a1a",
+    "surfaceColor": "#1a1a2e",
+    "textColor": "#ffffff",
+    "textSecondaryColor": "#aaaacc",
+    "borderColor": "#333355",
+    "blurRadius": 30,
+    "opacity": 0.85,
+    "cornerRadius": 12,
+    "animationDuration": 250,
+    "gradients": {
+        "primary": ["#1a2a5a", "#3a1a5a"],
+        "accent": ["#4488ff", "#8844ff"],
+        "surface": ["#1a1a2e", "#12122a"]
+    },
+    "shadows": {
+        "panel": "0 8px 32px rgba(0, 0, 0, 0.4)",
+        "popup": "0 16px 48px rgba(0, 0, 0, 0.5)",
+        "button": "0 2px 8px rgba(0, 0, 0, 0.3)"
+    },
+    "fonts": {
+        "primary": "Inter",
+        "monospace": "Fira Code",
+        "sizes": {
+            "small": 11,
+            "body": 13,
+            "subtitle": 16,
+            "title": 20,
+            "headline": 28
+        }
+    },
+    "icons": {
+        "theme": "Papirus-Dark",
+        "cursor": "Breeze"
+    }
+}

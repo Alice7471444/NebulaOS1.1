@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Settings
+Comment=NebulaOS System Settings
+Exec=/usr/bin/python3 /opt/nebula-apps/settings/nebula-settings.py
+Icon=preferences-system
+Terminal=false
+Type=Application
+Categories=System;Settings;
+StartupNotify=true

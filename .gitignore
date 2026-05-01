@@ -1,0 +1,47 @@
+# Build outputs
+build/
+iso-output/*.iso
+iso-output/*.sha256
+*.log
+
+# VM files
+vm/
+*.vmdk
+*.vdi
+*.vmx
+*.vmxf
+*.nvram
+*.vmsd
+*.vbox
+*.vbox-prev
+
+# Cache
+.cache/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Qt
+moc_*
+*.o
+*.so
+*.a
+
+# OS
+.DS_Store
+Thumbs.db

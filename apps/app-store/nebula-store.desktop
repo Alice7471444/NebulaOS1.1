@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=App Store
+Comment=NebulaOS Application Store
+Exec=/usr/bin/python3 /opt/nebula-apps/app-store/nebula-store.py
+Icon=system-software-install
+Terminal=false
+Type=Application
+Categories=System;PackageManager;
+StartupNotify=true

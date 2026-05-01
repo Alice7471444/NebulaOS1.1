@@ -1,0 +1,34 @@
+---
+componentName: nebulaos
+
+strings:
+    productName:         "NebulaOS"
+    shortProductName:    "NebulaOS"
+    version:             "1.0"
+    shortVersion:        "1.0"
+    versionedName:       "NebulaOS 1.0"
+    shortVersionedName:  "NebulaOS 1.0"
+    bootloaderEntryName: "NebulaOS"
+    productUrl:          "https://github.com/nebulaos"
+    supportUrl:          "https://github.com/nebulaos/issues"
+    knownIssuesUrl:      "https://github.com/nebulaos/issues"
+    releaseNotesUrl:     "https://github.com/nebulaos/releases"
+
+images:
+    productLogo:         "nebula-logo.png"
+    productIcon:         "nebula-icon.png"
+    productWelcome:      "nebula-welcome.png"
+    productWallpaper:    "nebula-wallpaper.png"
+
+slideshow:
+    - "slide1.png"
+    - "slide2.png"
+    - "slide3.png"
+
+slideshowAPI: 2
+
+style:
+    sidebarBackground:   "#0a0a1a"
+    sidebarText:         "#ffffff"
+    sidebarTextSelect:   "#4488ff"
+    sidebarTextHighlight: "#4488ff"
