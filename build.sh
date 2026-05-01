@@ -73,31 +73,37 @@ configure_live_build() {
     log "Configuring live-build..."
     cd "${NEBULA_BUILD_DIR}"
 
-    lb config \
-        --distribution "${NEBULA_SUITE}" \
-        --architectures "${NEBULA_ARCH}" \
-        --archive-areas "main contrib non-free non-free-firmware" \
-        --mirror-bootstrap "${NEBULA_MIRROR}" \
-        --mirror-chroot "${NEBULA_MIRROR}" \
-        --mirror-binary "${NEBULA_MIRROR}" \
-        --bootappend-live "boot=live components hostname=${NEBULA_HOSTNAME} username=${NEBULA_DEFAULT_USER} locales=${NEBULA_DEFAULT_LOCALE} timezone=${NEBULA_DEFAULT_TIMEZONE}" \
-        --iso-application "${NEBULA_NAME}" \
-        --iso-publisher "${NEBULA_NAME} Project" \
-        --iso-volume "${NEBULA_ISO_LABEL}" \
-        --image-name "${NEBULA_NAME}" \
-        --binary-images iso-hybrid \
-        --bootloaders "grub-efi,syslinux" \
-        --debian-installer live \
-        --memtest none \
-        --updates true \
-        --security true \
-        --firmware-binary true \
-        --firmware-chroot true \
-        --win32-loader false \
-        --checksums sha256 \
-        --compression "${NEBULA_COMPRESSION}" \
-        --apt-recommends true \
+    # Build lb config command with only supported options
+    local lb_args=(
+        --distribution "${NEBULA_SUITE}"
+        --architectures "${NEBULA_ARCH}"
+        --archive-areas "main contrib non-free non-free-firmware"
+        --mirror-bootstrap "${NEBULA_MIRROR}"
+        --mirror-chroot "${NEBULA_MIRROR}"
+        --mirror-binary "${NEBULA_MIRROR}"
+        --bootappend-live "boot=live components hostname=${NEBULA_HOSTNAME} username=${NEBULA_DEFAULT_USER} locales=${NEBULA_DEFAULT_LOCALE} timezone=${NEBULA_DEFAULT_TIMEZONE}"
+        --iso-application "${NEBULA_NAME}"
+        --iso-publisher "${NEBULA_NAME} Project"
+        --iso-volume "${NEBULA_ISO_LABEL}"
+        --image-name "${NEBULA_NAME}"
+        --binary-images iso-hybrid
+        --memtest none
+        --updates true
+        --security true
+        --checksums sha256
+        --compression "${NEBULA_COMPRESSION}"
+        --apt-recommends true
         --debootstrap-options "--variant=minbase"
+    )
+
+    # Add bootloaders (try grub-efi first, fall back to syslinux only)
+    if dpkg -l grub-efi-amd64-bin &>/dev/null; then
+        lb_args+=(--bootloaders "grub-efi,syslinux")
+    else
+        lb_args+=(--bootloaders "syslinux")
+    fi
+
+    lb config "${lb_args[@]}"
 
     ok "Live-build configured"
 }
@@ -416,13 +422,16 @@ build_iso() {
     log "Starting ISO build..."
     cd "${NEBULA_BUILD_DIR}"
 
+    set +e
     lb build 2>&1 | tee "${NEBULA_ROOT}/build.log"
+    local build_rc=${PIPESTATUS[0]}
+    set -e
 
-    if [[ $? -eq 0 ]]; then
+    if [[ $build_rc -eq 0 ]]; then
         # Move ISO to output directory
         local iso_file=$(find "${NEBULA_BUILD_DIR}" -name "*.iso" -type f | head -1)
         if [[ -n "$iso_file" ]]; then
-            mv "$iso_file" "${NEBULA_ISO_OUTPUT}/${NEBULA_ISO_NAME}"
+            cp "$iso_file" "${NEBULA_ISO_OUTPUT}/${NEBULA_ISO_NAME}"
             ok "ISO built successfully: ${NEBULA_ISO_OUTPUT}/${NEBULA_ISO_NAME}"
 
             # Generate checksums
@@ -435,10 +444,14 @@ build_iso() {
             log "ISO size: ${iso_size}"
         else
             err "ISO file not found after build!"
+            echo "=== Files in build dir ==="
+            find "${NEBULA_BUILD_DIR}" -name "*.iso" -o -name "*.hybrid.iso" 2>/dev/null || true
+            ls -la "${NEBULA_BUILD_DIR}/" || true
             exit 1
         fi
     else
-        err "ISO build failed! Check build.log for details."
+        err "ISO build failed (exit code: $build_rc)! Check build.log for details."
+        tail -50 "${NEBULA_ROOT}/build.log" || true
         exit 1
     fi
 }

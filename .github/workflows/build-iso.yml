@@ -1,0 +1,90 @@
+name: Build NebulaOS ISO
+
+on:
+  push:
+    branches:
+      - main
+      - 'devin/**'
+  workflow_dispatch:
+
+jobs:
+  build-iso:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Free up disk space
+        run: |
+          echo "=== Freeing disk space ==="
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache
+          sudo apt-get clean
+          df -h
+
+      - name: Install build dependencies
+        run: |
+          echo "=== Installing live-build and dependencies ==="
+          sudo apt-get update
+          sudo apt-get install -y \
+            live-build \
+            debootstrap \
+            squashfs-tools \
+            xorriso \
+            grub-efi-amd64-bin \
+            grub-pc-bin \
+            mtools \
+            dosfstools \
+            isolinux \
+            syslinux-common \
+            syslinux-utils
+
+      - name: Build NebulaOS ISO
+        run: |
+          echo "=== Starting NebulaOS ISO Build ==="
+          sudo ./build.sh 2>&1 | tee build-output.log
+          echo "=== Build Complete ==="
+
+      - name: Verify ISO
+        run: |
+          echo "=== Verifying ISO ==="
+          ls -lh iso-output/
+          if [ -f iso-output/NebulaOS-v1.iso ]; then
+            echo "ISO generated successfully!"
+            sha256sum iso-output/NebulaOS-v1.iso
+            file iso-output/NebulaOS-v1.iso
+          else
+            echo "ERROR: ISO not found!"
+            echo "=== Build Log (last 100 lines) ==="
+            tail -100 build-output.log
+            exit 1
+          fi
+
+      - name: Upload ISO artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: NebulaOS-v1-ISO
+          path: iso-output/NebulaOS-v1.iso
+          retention-days: 30
+          compression-level: 0
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build-output.log
+          retention-days: 7
+
+      - name: Upload checksum
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: NebulaOS-v1-checksum
+          path: iso-output/NebulaOS-v1.iso.sha256
+          retention-days: 30
