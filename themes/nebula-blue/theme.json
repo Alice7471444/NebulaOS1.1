@@ -1,0 +1,40 @@
+{
+    "name": "Nebula Blue",
+    "description": "Electric blue neon theme with cyberpunk aesthetics",
+    "darkMode": true,
+    "accentColor": "#00bbff",
+    "backgroundColor": "#050510",
+    "surfaceColor": "#0a0a20",
+    "textColor": "#e0e8ff",
+    "textSecondaryColor": "#8888bb",
+    "borderColor": "#1a1a44",
+    "blurRadius": 35,
+    "opacity": 0.80,
+    "cornerRadius": 14,
+    "animationDuration": 300,
+    "gradients": {
+        "primary": ["#0a1a3a", "#001a2a"],
+        "accent": ["#00bbff", "#0066ff"],
+        "surface": ["#0a0a20", "#050515"]
+    },
+    "shadows": {
+        "panel": "0 8px 32px rgba(0, 100, 255, 0.1)",
+        "popup": "0 16px 48px rgba(0, 100, 255, 0.15)",
+        "button": "0 2px 12px rgba(0, 187, 255, 0.2)"
+    },
+    "fonts": {
+        "primary": "Inter",
+        "monospace": "Fira Code",
+        "sizes": {
+            "small": 11,
+            "body": 13,
+            "subtitle": 16,
+            "title": 20,
+            "headline": 28
+        }
+    },
+    "icons": {
+        "theme": "Papirus-Dark",
+        "cursor": "Breeze"
+    }
+}

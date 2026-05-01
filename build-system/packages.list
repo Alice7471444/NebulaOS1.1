@@ -1,0 +1,107 @@
+# NebulaOS Package List
+# Base packages for the live/installed system
+# Only packages confirmed available in Debian Bookworm repos
+
+# === Base System ===
+linux-image-amd64
+systemd
+systemd-sysv
+dbus
+udev
+sudo
+bash
+
+# === Bootloader ===
+grub-efi-amd64
+grub-pc-bin
+efibootmgr
+
+# === Filesystem ===
+e2fsprogs
+btrfs-progs
+dosfstools
+ntfs-3g
+
+# === Networking ===
+network-manager
+wpasupplicant
+wireless-tools
+bluez
+openvpn
+network-manager-openvpn
+
+# === Display Server ===
+xwayland
+xorg
+xserver-xorg
+xserver-xorg-video-all
+xserver-xorg-input-all
+mesa-utils
+libgl1-mesa-dri
+
+# === Desktop Dependencies ===
+pipewire
+wireplumber
+
+# === Fonts ===
+fonts-noto
+fonts-noto-color-emoji
+
+# === Themes & Icons ===
+papirus-icon-theme
+adwaita-icon-theme
+
+# === Core Applications ===
+firefox-esr
+thunar
+xfce4-terminal
+gedit
+gnome-calculator
+gnome-calendar
+evince
+eog
+rhythmbox
+gnome-system-monitor
+
+# === Multimedia Codecs ===
+gstreamer1.0-plugins-base
+gstreamer1.0-plugins-good
+gstreamer1.0-plugins-bad
+gstreamer1.0-plugins-ugly
+gstreamer1.0-libav
+ffmpeg
+
+# === Development Tools ===
+git
+python3
+python3-pip
+python3-venv
+gcc
+g++
+make
+cmake
+
+# === Security ===
+ufw
+apparmor
+apparmor-utils
+
+# === Package Management ===
+flatpak
+
+# === VM Guest Tools ===
+open-vm-tools
+open-vm-tools-desktop
+
+# === Utilities ===
+curl
+wget
+unzip
+p7zip-full
+htop
+neofetch
+rsync
+gparted
+
+# === AI / TTS Dependencies ===
+espeak-ng

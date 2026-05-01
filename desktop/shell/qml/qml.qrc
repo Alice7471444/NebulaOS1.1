@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/Main.qml</file>
+        <file>qml/components/Taskbar.qml</file>
+        <file>qml/components/StartMenu.qml</file>
+        <file>qml/components/SearchPanel.qml</file>
+        <file>qml/components/NotificationCenter.qml</file>
+        <file>qml/components/QuickSettings.qml</file>
+        <file>qml/components/WidgetsPanel.qml</file>
+        <file>qml/components/GlassBackground.qml</file>
+        <file>qml/components/NebulaButton.qml</file>
+        <file>qml/components/AppIcon.qml</file>
+        <file>qml/panels/DesktopView.qml</file>
+        <file>qml/panels/LockScreen.qml</file>
+    </qresource>
+</RCC>
