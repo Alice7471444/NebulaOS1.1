@@ -1,0 +1,54 @@
+{
+    "name": "Nebula Neon",
+    "description": "Cyberpunk neon glow theme with vibrant purple/pink accents",
+    "darkMode": true,
+    "accentColor": "#bf00ff",
+    "backgroundColor": "#0a0612",
+    "surfaceColor": "#120a1a",
+    "textColor": "#f0e8ff",
+    "textSecondaryColor": "#aa88cc",
+    "borderColor": "#2a1a3a",
+    "blurRadius": 40,
+    "opacity": 0.85,
+    "cornerRadius": 16,
+    "animationDuration": 250,
+    "gradients": {
+        "primary": ["#1a0a2a", "#0a0612"],
+        "accent": ["#ff00ff", "#bf00ff"],
+        "surface": ["#1a0a28", "#120a18"]
+    },
+    "glow": {
+        "enabled": true,
+        "color": "#ff00ff",
+        "blur": 20,
+        "spread": 5,
+        "intensity": 0.6
+    },
+    "shadows": {
+        "panel": "0 8px 32px rgba(191, 0, 255, 0.15)",
+        "popup": "0 16px 48px rgba(191, 0, 255, 0.2)",
+        "button": "0 2px 12px rgba(255, 0, 255, 0.3)",
+        "glow": "0 0 20px rgba(191, 0, 255, 0.5)"
+    },
+    "fonts": {
+        "primary": "Inter",
+        "monospace": "Fira Code",
+        "sizes": {
+            "small": 11,
+            "body": 13,
+            "subtitle": 16,
+            "title": 20,
+            "headline": 28
+        }
+    },
+    "icons": {
+        "theme": "Papirus-Dark",
+        "cursor": "Breeze"
+    },
+    "effects": {
+        "glassmorphism": true,
+        "blurBehind": true,
+        "transitionAnimation": "ease-in-out",
+        "hoverGlow": true
+    }
+}

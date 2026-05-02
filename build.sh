@@ -31,7 +31,7 @@ banner() {
     echo "  ██║ ╚████║███████╗██████╔╝╚██████╔╝███████╗██║  ██║╚██████╔╝███████║"
     echo "  ╚═╝  ╚═══╝╚══════╝╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝"
     echo -e "${NC}"
-    echo "  Build System v${NEBULA_VERSION} (${NEBULA_CODENAME})"
+    echo "  🌀 NebulaOS Build System v${NEBULA_VERSION} (${NEBULA_CODENAME})"
     echo ""
 }
 

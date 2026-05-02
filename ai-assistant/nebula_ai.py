@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Nebula AI - NebulaOS Integrated AI Assistant
+Nebula AI - NebulaOS Integrated AI Assistant v1.1 (Aurora)
 Supports local mode and optional OpenAI API integration
 """
 
@@ -9,6 +9,7 @@ import os
 import json
 import subprocess
 import threading
+import random
 from pathlib import Path
 from datetime import datetime
 
@@ -18,7 +19,7 @@ from PyQt6.QtWidgets import (
     QFrame, QComboBox, QCheckBox
 )
 from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QThread, QSettings
-from PyQt6.QtGui import QFont, QTextCursor
+from PyQt6.QtGui import QFont, QTextCursor, QColor, QPalette
 
 
 class AIBackend:
@@ -67,11 +68,40 @@ class AIBackend:
         if any(w in lower for w in ["help", "what can you do"]):
             return self._get_help()
 
-        if any(w in lower for w in ["hello", "hi", "hey"]):
-            return "Hello! I'm Nebula AI, your personal assistant. How can I help you today?"
+        if any(w in lower for w in ["hello", "hi", "hey", "hey"]):
+            responses = [
+                "Hello! I'm Nebula AI, your personal assistant. How can I help you today?",
+                "Hey there! What can I do for you?",
+                "Hi! Ready to assist you with NebulaOS!"
+            ]
+            return random.choice(responses)
 
         if any(w in lower for w in ["shutdown", "power off", "turn off"]):
-            return "To shut down your computer, click the power button in the Start Menu or say 'shutdown now'."
+            return "To shut down, say 'shutdown now' or use the power button in the Start Menu."
+
+        if "shutdown now" in lower or "power off now" in lower:
+            try:
+                subprocess.run(["sudo", "poweroff"], check=True)
+                return "Shutting down..."
+            except:
+                return "I need root privileges to shut down. Use the Start Menu instead."
+
+        if "restart" in lower or "reboot" in lower:
+            try:
+                subprocess.run(["sudo", "reboot"], check=True)
+                return "Restarting..."
+            except:
+                return "I need root privileges to restart. Use the Start Menu instead."
+
+        if "screenshot" in lower:
+            try:
+                subprocess.Popen(["scrot", "-d", "5", str(Path.home()) + "/Screenshot.png"])
+                return "Screenshot in 5 seconds! Look good 📸"
+            except:
+                return "Screenshot tool not found. Use the Print key or install scrot."
+
+        if "lock" in lower or "lock screen" in lower:
+            return "To lock the screen, press Super+L or say 'lock screen now'"
 
         if any(w in lower for w in ["update", "upgrade"]):
             return "To update your system, go to Settings > Updates or run 'sudo apt update && sudo apt upgrade' in the terminal."
@@ -180,18 +210,30 @@ class AIBackend:
         return "\n".join(info)
 
     def _get_help(self):
-        return """I'm Nebula AI, and here's what I can do:
+        return """I'm Nebula AI v1.1 (Aurora), and here's what I can do:
 
-  - Open apps: "Open Firefox", "Launch terminal"
-  - Search files: "Find document.pdf"
-  - System info: "Show system info"
-  - Time & date: "What time is it?"
-  - Battery status: "Check battery"
-  - Updates: "How do I update?"
+  🤖 AI Chat (with OpenAI API key in Settings)
+  
+  📱 Apps:
+  - "Open Firefox", "Launch terminal", "Start settings"
+  - "Calculator", "Files", "Calendar", "App store"
+  
+  🔍 Search:
+  - "Find document.pdf", "Search for [filename]"
+  
+  💻 System:
+  - "System info" - Show system status
+  - "Check battery" - Power status
+  - "Weather" - Requires API key
+  - "Time", "Date" - Current time
+  
+  ⚡ Quick Actions:
+  - "Screenshot", "Lock screen"
+  - "Shutdown now", "Restart"
+  
+Keyboard shortcut: Super+Space to toggle me!
 
-For advanced AI chat, configure an OpenAI API key in Settings > AI Assistant.
-
-Keyboard shortcut: Super+Space to toggle me!"""
+For advanced AI chat, configure an OpenAI API key in Settings > AI Assistant."""
 
 
 class ChatMessage(QFrame):
@@ -342,9 +384,13 @@ class NebulaAIWindow(QMainWindow):
 
     def show_welcome(self):
         welcome = (
-            "Hello! I'm Nebula AI, your personal assistant. "
-            "I can help you launch apps, search files, check system info, and more. "
-            "Type a message or say 'help' to see what I can do!"
+            "Hello! I'm Nebula AI v1.1 (Aurora), your personal assistant on NebulaOS. ✨\n\n"
+            "I can help you with:\n"
+            "• Launching apps (say 'Open Firefox')\n"
+            "• Searching files (say 'Find document')\n"
+            "• System info and status\n"
+            "• And much more!\n\n"
+            "Type a message or say 'help' to see all commands!"
         )
         self.add_message(welcome, is_user=False)
 
