@@ -83,20 +83,18 @@ configure_live_build() {
     lb config \
         --distribution "${NEBULA_SUITE}" \
         --architectures "${NEBULA_ARCH}" \
-        --archive-areas "main contrib non-free non-free-firmware" \
+        --archive-areas "main contrib non-free" \
         --mirror-bootstrap "${NEBULA_MIRROR}" \
         --mirror-chroot "${NEBULA_MIRROR}" \
         --mirror-binary "${NEBULA_MIRROR}" \
-        --mirror-chroot-security "http://security.debian.org/debian-security" \
-        --mirror-binary-security "http://security.debian.org/debian-security" \
         --bootappend-live "boot=live components hostname=${NEBULA_HOSTNAME} username=${NEBULA_DEFAULT_USER} locales=${NEBULA_DEFAULT_LOCALE} timezone=${NEBULA_DEFAULT_TIMEZONE}" \
         --binary-images iso-hybrid \
         --bootloader syslinux \
-        --bootstrap-flavour minimal \
         --checksums sha256 \
         --compression gzip \
         --apt-recommends true \
-        --debian-installer false
+        --debian-installer none \
+        --apt-indices true
 
     ok "Live-build configured"
 }
@@ -116,6 +114,17 @@ setup_hooks() {
     log "Setting up build hooks..."
     # Ubuntu live-build 3.0 uses config/hooks/ directly
     mkdir -p "${NEBULA_BUILD_DIR}/config/hooks"
+
+    # GPG fix hook - install gnupg before any apt operations
+    cat > "${NEBULA_BUILD_DIR}/config/hooks/0050-gpg-fix.hook.chroot" << 'HOOK'
+#!/bin/bash
+set -e
+echo "[NebulaOS] Installing GPG for package verification..."
+apt-get update || true
+apt-get install -y gnupg gpgv || true
+echo "[NebulaOS] GPG installed."
+HOOK
+chmod +x "${NEBULA_BUILD_DIR}/config/hooks/0050-gpg-fix.hook.chroot"
 
     # Chroot hook: runs inside the chroot during build
     cat > "${NEBULA_BUILD_DIR}/config/hooks/0100-nebula-setup.hook.chroot" << 'HOOK'
