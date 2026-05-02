@@ -1,49 +1,68 @@
-# NebulaOS
+# 🚀 NebulaOS 1.1 (Aurora)
 
 <div align="center">
 
-**A Modern, Lightweight, AI-Powered Desktop Operating System**
+<p align="center">
 
-*Inspired by Windows 11 aesthetics. Built on Linux. Designed for the future.*
+![NebulaOS](https://img.shields.io/badge/NebulaOS-1.1_Aurora-7C3AED?style=for-the-badge&logo=linux)
+![Version](https://img.shields.io/badge/version-1.1-blueviolet)
+![License](https://img.shields.io/badge/license-GPL--3.0-green)
+![Debian](https://img.shields.io/badge/base-Debian%2012-a80030?logo=debian)
+![Status](https://img.shields.io/badge/status-Active-success)
+![Stars](https://img.shields.io/github/stars/Alice7471444/NebulaOS1.1?style=social)
+![Forks](https://img.shields.io/github/forks/Alice7471444/NebulaOS1.1?style=social)
 
-[![Version](https://img.shields.io/badge/version-1.0-blue)](https://github.com/nebulaos)
-[![License](https://img.shields.io/badge/license-GPL--3.0-green)](LICENSE)
-[![Base](https://img.shields.io/badge/base-Debian%20Bookworm-red)](https://debian.org)
+</p>
+
+**✨ A Modern, Lightweight, AI-Powered Desktop Operating System ✨**
+
+*Built on Linux • Inspired by Windows 11 aesthetics • Designed for the future*
 
 </div>
 
 ---
 
-## Overview
+<div align="center">
 
-NebulaOS is a custom Linux-based desktop operating system featuring:
+<a href="https://debian.org">
+  <img src="https://img.shields.io/badge/debian-12+-a80030?logo=debian" alt="Debian" />
+</a>
+<a href="https://qt.io">
+  <img src="https://img.shields.io/badge/Qt-6-41cd52?logo=qt" alt="Qt6" />
+</a>
+<a href="https://wayland.freedesktop.org/">
+  <img src="https://img.shields.io/badge/Wayland-Ready-41cd52" alt="Wayland" />
+</a>
+<a href="https://python.org/">
+  <img src="https://img.shields.io/badge/Python-3.11+-3776AB?logo=python" alt="Python" />
+</a>
 
-- **Modern UI** - Windows 11 inspired desktop shell with glassmorphism, smooth animations, and rounded corners
-- **Qt6/QML Desktop Shell** - GPU-accelerated compositor with Wayland support
-- **AI Assistant** - Built-in Nebula AI with local and OpenAI API support
-- **App Store** - GUI application store with Flatpak backend
-- **Privacy-Focused** - AppArmor, sandboxed apps, firewall enabled by default
-- **Lightweight** - Under 2GB RAM idle, boots in under 15 seconds
-- **VM Ready** - First-class VMware and VirtualBox support
+</div>
 
-## Quick Start
+---
 
-### Prerequisites
+## 🌟 Features
 
-- Debian 12+ or Ubuntu 22.04+ build host
-- 30GB+ free disk space
-- Root access (for live-build)
-- 8GB+ RAM recommended for building
+| Feature | Description |
+|---------|-------------|
+| 🎨 **Modern UI** | Windows 11 inspired glassmorphism with smooth 60FPS animations |
+| ⚡ **AI Assistant** | Built-in Nebula AI with local + OpenAI API support 🤖 |
+| 🔒 **Privacy First** | AppArmor, sandboxed apps, firewall enabled by default |
+| 📦 **App Store** | GUI package manager with Flatpak backend |
+| 💨 **Lightweight** | Under 2GB RAM idle, boots in under 10 seconds |
+| 🖥️ **VM Ready** | First-class VMware and VirtualBox support |
+
+---
+
+## 🚀 Quick Start
 
 ### Build the ISO
 
 ```bash
-git clone https://github.com/nebulaos/NebulaOS.git
-cd NebulaOS
+git clone https://github.com/Alice7471444/NebulaOS1.1.git
+cd NebulaOS1.1
 sudo ./build.sh
 ```
-
-The ISO will be generated at `iso-output/NebulaOS-v1.iso`.
 
 ### Launch in VirtualBox
 
@@ -59,218 +78,220 @@ The ISO will be generated at `iso-output/NebulaOS-v1.iso`.
 
 ### Default Credentials
 
-| Field    | Value    |
-|----------|----------|
+| Field | Value |
+|-------|-------|
 | Username | `nebula` |
 | Password | `nebula` |
 
-## Architecture
+---
+
+## 🏗️ Architecture
 
 ```
-NebulaOS
-├── kernel/          # Kernel configuration and tuning
-├── desktop/         # Desktop shell (Qt6/QML)
-│   ├── shell/       # Main shell: taskbar, start menu, panels
-│   ├── widgets/     # Desktop widgets
-│   └── themes/      # Theme engine
-├── apps/            # Core applications
-│   ├── settings/    # System Settings (PyQt6)
-│   ├── app-store/   # GUI App Store (PyQt6 + Flatpak)
-│   ├── file-manager/
-│   ├── terminal/
-│   ├── text-editor/
-│   ├── calculator/
-│   └── ...
-├── installer/       # Calamares installer configuration
-├── ai-assistant/    # Nebula AI (Python + PyQt6)
-├── build-system/    # ISO build configuration
-│   ├── config.sh    # Central build config
-│   └── packages.list
-├── themes/          # Theme packs (JSON + assets)
-│   ├── dark/
-│   ├── light/
-│   └── nebula-blue/
-├── scripts/         # VM launch scripts
-├── docs/            # Documentation
-└── iso-output/      # Generated ISO files
+NebulaOS v1.1 (Aurora)
+├── kernel/              # Kernel configuration & tuning
+├── desktop/            # Desktop shell (Qt6/QML)
+│   └── shell/           # Main shell: taskbar, start menu, panels
+├── apps/               # Core applications
+│   ├── settings/        # System Settings
+│   ├── app-store/      # GUI App Store
+│   └── welcome/        # Welcome app
+├── ai-assistant/        # Nebula AI 🤖
+├── build-system/       # ISO build configuration
+├── installer/          # Calamares installer
+├── themes/              # Theme packs (Dark/Light/Neon)
+├── docs/                # Documentation
+└── scripts/            # VM launch scripts
 ```
 
-## Desktop Environment
+---
+
+## 🖥️ Desktop Environment
 
 ### Technology Stack
 
-| Component      | Technology          |
-|---------------|---------------------|
+| Component | Technology |
+|-----------|-----------|
 | Display Server | Wayland (X11 fallback) |
-| Shell Framework | Qt6 + QML          |
-| Backend Logic  | C++ / Rust          |
-| Applications   | Python (PyQt6)      |
-| Compositor     | Custom (labwc fallback) |
-| Init System    | systemd             |
-| Audio          | PipeWire            |
+| Shell Framework | Qt6 + QML |
+| Backend Logic | C++ / Rust |
+| Applications | Python (PyQt6) |
+| Compositor | Custom (labwc fallback) |
+| Init System | systemd |
+| Audio | PipeWire |
 
 ### UI Features
 
-- **Centered Taskbar** with pinned apps, system tray, and clock
-- **Start Menu** with app search, pinned apps, and recent items
-- **Search Panel** for apps, files, settings, and web
-- **Notification Center** with Do Not Disturb mode
-- **Quick Settings** with toggles for Wi-Fi, Bluetooth, Dark Mode, etc.
-- **Widgets Panel** with weather, calendar, system monitor, and AI
-- **Virtual Desktops** with smooth switching
-- **Snap Layouts** for window tiling (halves, thirds, quarters)
-- **Lock Screen** with clock and user profile
+| Feature | Shortcut | Description |
+|---------|----------|-------------|
+| Start Menu | `Super+S` | App search, pinned/recent apps |
+| Search Panel | `Super+Q` | Apps, files, settings, web |
+| Quick Settings | `Super+A` | Wi-Fi, Bluetooth, Dark Mode |
+| Notification Center | `Super+N` | Do Not Disturb mode |
+| Widgets Panel | `Super+W` | Weather, calendar, system monitor |
+| AI Assistant | `Super+Space` | Nebula AI integration |
+| File Manager | `Super+E` | File browser |
+| Terminal | `Super+T` | Terminal emulator |
+| Lock Screen | `Super+L` | Lock screen with clock |
+
+---
+
+## 🤖 Nebula AI
+
+<p align="center">
+
+<a href="https://openai.com/">
+  <img src="https://img.shields.io/badge/Powered_by-Nebula_AI-8B5CF6?logo=robot" alt="AI" />
+</a>
+
+</p>
+
+### Capabilities
+
+| Mode | Description |
+|------|-------------|
+| **Local Mode** | Rule-based system commands |
+| **OpenAI Mode** | Full conversational AI via API |
+| **Voice** | Speech-to-text and TTS (espeak-ng) |
+
+### Voice Commands
+
+- "Open [app]" - Launch applications
+- "Find [file]" - Search files
+- "System info" - Check system status
+- "What time is it?" - Show time and date
+- "Check battery" - Battery status
+
+---
+
+## 🎨 Themes
+
+<p align="center">
+
+| Theme | Description |
+|-------|-------------|
+| 🌑 **Nebula Dark** | Deep space black with electric blue |
+| ☀️ **Nebula Light** | Clean, airy light theme |
+| 🌟 **Nebula Neon** | Cyberpunk neon glow variant |
+
+</p>
 
 ### Visual Design
 
-- Glassmorphism / Acrylic blur effects
-- Rounded corners (12px radius)
-- Smooth 60 FPS GPU-accelerated animations
-- Dark/Light/Auto theme switching
-- Customizable accent colors
-- Neon-accented cyberpunk variant theme
+- � glassmorphism / Acrylic blur effects
+- 🔘 Rounded corners (12px radius)
+- ⚡ Smooth 60 FPS GPU-accelerated animations
+- 🌙 Dark/Light/Auto theme switching
+- 🎨 Customizable accent colors
 
-## Applications
+---
 
-### Preinstalled
+## 🔐 Security
 
-| Category     | Apps                                           |
-|-------------|------------------------------------------------|
-| Browser     | Firefox ESR                                     |
-| Files       | Thunar with tabs, split view                    |
-| Terminal    | Alacritty                                       |
-| Editor      | gedit / xed                                     |
-| Calculator  | GNOME Calculator                                |
-| Calendar    | GNOME Calendar                                  |
-| Media       | Celluloid (Video), Rhythmbox (Music)            |
-| System      | GNOME System Monitor, GParted                   |
-| Settings    | NebulaOS Settings (custom)                      |
-| App Store   | NebulaOS Store (custom, Flatpak backend)        |
-| AI          | Nebula AI (custom)                              |
+<p align="center">
 
-### Developer Tools
+| Feature | Description |
+|---------|-------------|
+| 🛡️ UFW Firewall | Enabled by default (deny incoming) |
+| 🔒 AppArmor | Mandatory access control |
+| 🔑 SHA-512 | Password hashing |
+| 📦 Flatpak | Sandboxed applications |
+| 🔄 Auto Updates | Security patches |
 
-Pre-installed: Git, Python 3, Node.js, GCC, Make, CMake, Rust/Cargo
+</p>
 
-## Nebula AI
+---
 
-The built-in AI assistant supports:
+## ⌨️ Keyboard Shortcuts
 
-- **Local Mode** - Rule-based system commands, app launching, file search
-- **OpenAI Mode** - Full conversational AI via OpenAI API
-- **Voice** - Speech-to-text and text-to-speech (espeak-ng)
-- **System Integration** - Launch apps, search files, check system status
-- **Keyboard Shortcut** - `Super+Space` to toggle
+| Shortcut | Action |
+|----------|--------|
+| `Super+S` | Start Menu |
+| `Super+Q` | Search |
+| `Super+N` | Notification Center |
+| `Super+A` | Quick Settings |
+| `Super+W` | Widgets Panel |
+| `Super+E` | File Manager |
+| `Super+T` | Terminal |
+| `Super+L` | Lock Screen |
+| `Super+Space` | Nebula AI |
+| `Print` | Screenshot |
 
-Configure in Settings > AI Assistant.
+---
 
-## Themes
-
-Three built-in themes with full customization:
-
-| Theme        | Description                          |
-|-------------|--------------------------------------|
-| Nebula Dark  | Deep space black with electric blue  |
-| Nebula Light | Clean, airy light theme              |
-| Nebula Blue  | Cyberpunk neon blue variant          |
-
-Customize: accent colors, blur intensity, opacity, corner radius, animations.
-
-## System Requirements
+## 🖥️ System Requirements
 
 ### Minimum
 
-- CPU: x86_64 dual-core
-- RAM: 2 GB
-- Disk: 15 GB
-- Display: 1024x768
+| Component | Requirement |
+|-----------|-------------|
+| CPU | x86_64 dual-core |
+| RAM | 2 GB |
+| Disk | 15 GB |
+| Display | 1024x768 |
 
 ### Recommended (VM)
 
-- RAM: 4 GB
-- CPU: 2 cores
-- Disk: 30 GB
-- Display: 1920x1080
-- 3D Acceleration: Enabled
+| Component | Requirement |
+|-----------|-------------|
+| RAM | 4 GB |
+| CPU | 2 cores |
+| Disk | 30 GB |
+| Display | 1920x1080 |
+| 3D Accel | Enabled |
 
-## VM Setup
+---
 
-See [docs/vm-setup.md](docs/vm-setup.md) for detailed instructions.
-
-### VirtualBox Settings
-
-- Type: Linux, Debian (64-bit)
-- RAM: 4096 MB
-- Video: 128 MB, VMSVGA, 3D Acceleration
-- Disk: 30 GB VDI
-- Network: NAT
-- Boot: EFI
-- Guest Additions: Auto-installed
-
-### VMware Settings
-
-- Guest OS: Debian 12 x64
-- RAM: 4096 MB
-- Video: 256 MB, 3D Acceleration
-- Disk: 30 GB PVSCSI
-- Network: NAT
-- Firmware: EFI
-
-## Building from Source
-
-### Desktop Shell
+## 🛠️ Build from Source
 
 ```bash
+# Desktop Shell
 cd desktop/shell
 mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j$(nproc)
 sudo make install
-```
 
-### Full ISO
-
-```bash
-# Install build dependencies
+# Full ISO
 sudo apt install live-build debootstrap squashfs-tools xorriso \
     grub-efi-amd64-bin grub-pc-bin mtools
 
-# Build
 sudo ./build.sh
 ```
 
-## Keyboard Shortcuts
+---
 
-| Shortcut        | Action                |
-|----------------|----------------------|
-| `Super+S`      | Open Start Menu       |
-| `Super+Q`      | Open Search           |
-| `Super+N`      | Notification Center   |
-| `Super+A`      | Quick Settings        |
-| `Super+W`      | Widgets Panel         |
-| `Super+E`      | File Manager          |
-| `Super+T`      | Terminal              |
-| `Super+L`      | Lock Screen           |
-| `Super+Space`  | Nebula AI             |
-| `Print`        | Screenshot            |
+## 📜 License
 
-## Security
+<p align="center">
 
-- UFW firewall enabled (deny incoming, allow outgoing)
-- AppArmor mandatory access control
-- Password hashing with SHA-512
-- Sandboxed Flatpak applications
-- Automatic security updates
+Licensed under the [GNU General Public License v3.0](LICENSE).
 
-## License
+Built with 💜 using open-source software:
+Linux, Debian, Qt, PipeWire, Wayland, GRUB, systemd, Flatpak
 
-NebulaOS is released under the [GNU General Public License v3.0](LICENSE).
+</p>
 
-## Contributing
+---
+
+## 🤝 Contributing
 
 Contributions are welcome! See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
 
-## Credits
+---
 
-Built with love using open-source software:
-Linux, Debian, Qt, PipeWire, Wayland, GRUB, systemd, Flatpak, and many more.
+<div align="center">
+
+<p>
+
+⭐ Star us on GitHub | 🍴 Fork the project | 🐛 Report issues
+
+</p>
+
+<p>
+
+**NebulaOS v1.1 (Aurora)** — *The future of desktop operating systems*
+
+</p>
+
+</div>

@@ -1,13 +1,13 @@
 #!/bin/bash
-# NebulaOS Build Configuration
+# NebulaOS Build Configuration v1.1 (Aurora)
 # Central configuration for the entire build system
 
 export NEBULA_NAME="NebulaOS"
-export NEBULA_VERSION="1.0"
+export NEBULA_VERSION="1.1"
 export NEBULA_CODENAME="aurora"
 export NEBULA_ARCH="amd64"
-export NEBULA_ISO_NAME="NebulaOS-v1.iso"
-export NEBULA_ISO_LABEL="NebulaOS_v1"
+export NEBULA_ISO_NAME="NebulaOS-v1.1-Aurora.iso"
+export NEBULA_ISO_LABEL="NebulaOS_v1.1"
 
 # Base distribution
 export NEBULA_BASE="debian"
